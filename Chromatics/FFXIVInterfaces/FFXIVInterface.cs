@@ -47,9 +47,9 @@ namespace Chromatics
         private bool _lastcast;
         private bool _menuNotify;
 
-        private ActorEntity _playerInfo = new ActorEntity();
-        private ActorEntity _menuInfo = new ActorEntity();
-        private ConcurrentDictionary<uint, ActorEntity> _playerInfoX = new ConcurrentDictionary<uint, ActorEntity>();
+        private ActorItem _playerInfo = new ActorItem();
+        private ActorItem _menuInfo = new ActorItem();
+        private ConcurrentDictionary<uint, ActorItem> _playerInfoX = new ConcurrentDictionary<uint, ActorItem>();
 
         private bool _playgroundonce;
         private bool _successcast;
@@ -323,8 +323,8 @@ namespace Chromatics
                     if (processes11.Length == 0)
                         FfxivGameStop();
 
-                    _playerInfoX = Reader.GetActors().PCEntities;
-                    _menuInfo = ActorEntity.CurrentUser; //Reader.GetPlayerInfo().PlayerEntity;
+                    _playerInfoX = Reader.GetActors().CurrentPCs;
+                    _menuInfo = ActorItem.CurrentUser; //Reader.GetPlayerInfo().PlayerEntity;
                     
                     if (_playerInfoX.Count == 0)
                     {
@@ -581,16 +581,18 @@ namespace Chromatics
             try
             {
                 //Get Data
-                var targetInfo = new ActorEntity();
-                var targetEmnityInfo = new List<EnmityEntry>();
-                var partyInfo = new ConcurrentDictionary<uint, PartyEntity>();
-                var partyListNew = new List<uint>();
-                var partyListOld = new Dictionary<uint, uint>();
+                var targetInfo = new ActorItem();
+                var targetEmnityInfo = new List<EnmityItem>();
+                var partyInfo = new ConcurrentDictionary<uint, PartyMember>();
+                var partyListNew = new ConcurrentDictionary<uint, PartyMember>();
+                var partyListOld = new ConcurrentDictionary<uint, PartyMember>();
                 //var personalInfo = new PlayerEntity();
 
                 //_playerInfoX = Reader.GetActors()?.PCEntities;
-                _playerInfo = ActorEntity.CurrentUser;
-                var _playerData = Reader.GetPlayerInfo().PlayerEntity;
+                _playerInfo = ActorItem.CurrentUser;
+                var _playerData = Reader.GetCurrentPlayer().CurrentPlayer;
+
+                
                 
                 try
                 {
@@ -598,22 +600,22 @@ namespace Chromatics
                     {
                         if (Reader.CanGetTargetInfo())
                         {
-                            targetInfo = Reader.GetTargetInfo()?.TargetEntity?.CurrentTarget;
+                            targetInfo = Reader.GetTargetInfo()?.TargetInfo?.CurrentTarget;
                         }
 
                         if (Reader.CanGetEnmityEntities())
                         {
-                            targetEmnityInfo = Reader.GetTargetInfo()?.TargetEntity?.EnmityEntries;
+                            targetEmnityInfo = Reader.GetTargetInfo()?.TargetInfo?.EnmityItems;
                         }
 
                         //Console.WriteLine(@"Name:" + targetInfo.Name);
                     }
 
 
-                    partyInfo = Reader.GetPartyMembers()?.PartyEntities;
+                    partyInfo = Reader.GetPartyMembers()?.PartyMembers;
 
-                    partyListNew = Reader.GetPartyMembers()?.NewParty;
-                    partyListOld = Reader.GetPartyMembers()?.RemovedParty;
+                    partyListNew = Reader.GetPartyMembers()?.NewPartyMembers;
+                    partyListOld = Reader.GetPartyMembers()?.RemovedPartyMembers;
 
                     //personalInfo = Reader.GetPlayerInfo()?.PlayerEntity;
 
@@ -878,7 +880,7 @@ namespace Chromatics
                                     if (partyInfo != null && i < partyInfo.Count)
                                     {
                                         //Console.WriteLine(i);
-                                        var pid = partyListNew[Convert.ToInt32(i)];
+                                        var pid = partyListNew[(uint)Convert.ToInt32(i)];
                                         string ptType;
                                         string ptTpcurrent;
                                         string ptTppercent;
@@ -897,7 +899,7 @@ namespace Chromatics
                                             emnitytableX.OrderBy(kvp => kvp.Value);
 
                                             //Get your index in the list
-                                            ptEmnityno = emnitytableX.FindIndex(a => a.Key == partyInfo[pid].ID)
+                                            ptEmnityno = emnitytableX.FindIndex(a => a.Key == partyInfo[(uint)Convert.ToInt32(i)].ID)
                                                 .ToString();
                                         }
                                         else
@@ -905,7 +907,7 @@ namespace Chromatics
                                             ptEmnityno = "0";
                                         }
 
-                                        switch (partyInfo[pid].Job)
+                                        switch (partyInfo[(uint)Convert.ToInt32(i)].Job)
                                         {
                                             case Actor.Job.FSH:
                                                 ptType = "player";
@@ -1064,11 +1066,11 @@ namespace Chromatics
                                             ptTpcurrent = "1000";
                                         }
 
-                                        datastring[i] = "1," + ptType + "," + partyInfo[pid].Name + "," +
-                                                        partyInfo[pid].HPPercent.ToString("#0%") + "," +
-                                                        partyInfo[pid].HPCurrent + "," +
-                                                        partyInfo[pid].MPPercent.ToString("#0%") + "," +
-                                                        partyInfo[pid].MPCurrent + "," + ptTppercent + "," +
+                                        datastring[i] = "1," + ptType + "," + partyInfo[(uint)Convert.ToInt32(i)].Name + "," +
+                                                        partyInfo[(uint)Convert.ToInt32(i)].HPPercent.ToString("#0%") + "," +
+                                                        partyInfo[(uint)Convert.ToInt32(i)].HPCurrent + "," +
+                                                        partyInfo[(uint)Convert.ToInt32(i)].MPPercent.ToString("#0%") + "," +
+                                                        partyInfo[(uint)Convert.ToInt32(i)].MPCurrent + "," + ptTppercent + "," +
                                                         ptTpcurrent +
                                                         "," + ptEmnityno + "," + ptJob;
                                         //Console.WriteLine(i + @": " + datastring[i]);
@@ -1473,7 +1475,7 @@ namespace Chromatics
 
                         //if (PlayerInfo.IsClaimed)
                         //{
-                        var statEffects = _playerInfo.StatusEntries;
+                        var statEffects = _playerInfo.StatusItems;
 
                         if (statEffects.Count > 0)
                         {
@@ -4800,9 +4802,7 @@ namespace Chromatics
                             var polHpx = (currentHp - 0) * (70 - 0) / (maxHp - 0) + 0;
                             var polHpz = (currentHp - 0) * (65535 - 0) / (maxHp - 0) + 0;
                             var polHpz2 = (currentHp - 0) * (1.0 - 0.0) / (maxHp - 0) + 0.0;
-
-                            //Debug.WriteLine(polHpz2);
-
+                            
                             GlobalUpdateBulbStateBrightness(BulbModeTypes.HpTracker,
                                 polHp <= 10 ? colHpempty : colHpfull,
                                 (ushort)polHpz,
@@ -4813,6 +4813,8 @@ namespace Chromatics
                             GlobalApplyMapHeadsetLightingBrightness(DevModeTypes.HpTracker, colHpempty, polHp <= 10 ? colHpempty : colHpfull, false, polHpz2);
                             //GlobalApplyMapKeypadLightingBrightness(DevModeTypes.HpTracker, colHpempty, polHp <= 10 ? colHpempty : colHpfull, false, polHpz2);
                             GlobalApplyMapChromaLinkLightingBrightness(DevModeTypes.HpTracker, colHpempty, polHp <= 10 ? colHpempty : colHpfull, polHpz2);
+
+                            Console.WriteLine(_playerInfo.IsCasting);
 
                             if (polHp <= 40 && polHp > 30)
                             {
@@ -6120,19 +6122,19 @@ namespace Chromatics
                                 {
                                     FfxivHotbar.Keybindwhitelist.Clear();
 
-                                    foreach (var hotbar in hotbars.ActionEntities)
+                                    foreach (var hotbar in hotbars.ActionContainers)
                                     {
-                                        if (hotbar.Type == HotBarRecast.Container.CROSS_HOTBAR_1 ||
-                                            hotbar.Type == HotBarRecast.Container.CROSS_HOTBAR_2 ||
-                                            hotbar.Type == HotBarRecast.Container.CROSS_HOTBAR_3 ||
-                                            hotbar.Type == HotBarRecast.Container.CROSS_HOTBAR_4 ||
-                                            hotbar.Type == HotBarRecast.Container.CROSS_HOTBAR_5 ||
-                                            hotbar.Type == HotBarRecast.Container.CROSS_HOTBAR_6 ||
-                                            hotbar.Type == HotBarRecast.Container.CROSS_HOTBAR_7 ||
-                                            hotbar.Type == HotBarRecast.Container.CROSS_HOTBAR_8 ||
-                                            hotbar.Type == HotBarRecast.Container.CROSS_PETBAR) continue;
+                                        if (hotbar.ContainerType == Sharlayan.Core.Enums.Action.Container.CROSS_HOTBAR_1 ||
+                                            hotbar.ContainerType == Sharlayan.Core.Enums.Action.Container.CROSS_HOTBAR_2 ||
+                                            hotbar.ContainerType == Sharlayan.Core.Enums.Action.Container.CROSS_HOTBAR_3 ||
+                                            hotbar.ContainerType == Sharlayan.Core.Enums.Action.Container.CROSS_HOTBAR_4 ||
+                                            hotbar.ContainerType == Sharlayan.Core.Enums.Action.Container.CROSS_HOTBAR_5 ||
+                                            hotbar.ContainerType == Sharlayan.Core.Enums.Action.Container.CROSS_HOTBAR_6 ||
+                                            hotbar.ContainerType == Sharlayan.Core.Enums.Action.Container.CROSS_HOTBAR_7 ||
+                                            hotbar.ContainerType == Sharlayan.Core.Enums.Action.Container.CROSS_HOTBAR_8 ||
+                                            hotbar.ContainerType == Sharlayan.Core.Enums.Action.Container.CROSS_PETBAR) continue;
 
-                                        foreach (var action in hotbar.Actions)
+                                        foreach (var action in hotbar.ActionItems)
                                         {
                                             if (!action.IsKeyBindAssigned || string.IsNullOrEmpty(action.Name) ||
                                                 string.IsNullOrEmpty(action.KeyBinds) ||
@@ -6317,7 +6319,7 @@ namespace Chromatics
                                                                 if (action.IsProcOrCombo)
                                                                 {
                                                                     //Action Proc'd
-                                                                    if (hotbar.Type == HotBarRecast.Container.PETBAR)
+                                                                    if (hotbar.ContainerType == Sharlayan.Core.Enums.Action.Container.PETBAR)
                                                                     {
                                                                         GlobalApplyMapKeyLighting(keyid,
                                                                             ColorTranslator.FromHtml(ColorMappings
@@ -6332,7 +6334,7 @@ namespace Chromatics
                                                                 }
                                                                 else
                                                                 {
-                                                                    if (hotbar.Type == HotBarRecast.Container.PETBAR)
+                                                                    if (hotbar.ContainerType == Sharlayan.Core.Enums.Action.Container.PETBAR)
                                                                     {
                                                                         if (action.CoolDownPercent > 0)
                                                                             GlobalApplyMapKeyLighting(keyid,
@@ -6362,7 +6364,7 @@ namespace Chromatics
                                                             }
                                                             else
                                                             {
-                                                                if (hotbar.Type == HotBarRecast.Container.PETBAR)
+                                                                if (hotbar.ContainerType == Sharlayan.Core.Enums.Action.Container.PETBAR)
                                                                 {
                                                                     GlobalApplyMapKeyLighting(keyid,
                                                                         ColorTranslator.FromHtml(ColorMappings
@@ -6378,7 +6380,7 @@ namespace Chromatics
                                                         }
                                                         else
                                                         {
-                                                            if (hotbar.Type == HotBarRecast.Container.PETBAR)
+                                                            if (hotbar.ContainerType == Sharlayan.Core.Enums.Action.Container.PETBAR)
                                                             {
                                                                 GlobalApplyMapKeyLighting(keyid,
                                                                     ColorTranslator.FromHtml(ColorMappings
@@ -6521,7 +6523,7 @@ namespace Chromatics
                                                             {
                                                                 if (action.IsProcOrCombo)
                                                                 {
-                                                                    if (hotbar.Type == HotBarRecast.Container.PETBAR)
+                                                                    if (hotbar.ContainerType == Sharlayan.Core.Enums.Action.Container.PETBAR)
                                                                     {
                                                                         //Action Proc'd
                                                                         GlobalApplyMapKeyLighting(keyid,
@@ -6538,7 +6540,7 @@ namespace Chromatics
                                                                 }
                                                                 else
                                                                 {
-                                                                    if (hotbar.Type == HotBarRecast.Container.PETBAR)
+                                                                    if (hotbar.ContainerType == Sharlayan.Core.Enums.Action.Container.PETBAR)
                                                                     {
                                                                         if (action.CoolDownPercent > 0)
                                                                             GlobalApplyMapKeyLighting(keyid,
@@ -6568,7 +6570,7 @@ namespace Chromatics
                                                             }
                                                             else
                                                             {
-                                                                if (hotbar.Type == HotBarRecast.Container.PETBAR)
+                                                                if (hotbar.ContainerType == Sharlayan.Core.Enums.Action.Container.PETBAR)
                                                                 {
                                                                     GlobalApplyMapKeyLighting(keyid,
                                                                         ColorTranslator.FromHtml(ColorMappings
@@ -6584,7 +6586,7 @@ namespace Chromatics
                                                         }
                                                         else
                                                         {
-                                                            if (hotbar.Type == HotBarRecast.Container.PETBAR)
+                                                            if (hotbar.ContainerType == Sharlayan.Core.Enums.Action.Container.PETBAR)
                                                             {
                                                                 GlobalApplyMapKeyLighting(keyid,
                                                                     ColorTranslator.FromHtml(ColorMappings
