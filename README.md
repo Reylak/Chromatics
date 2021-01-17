@@ -58,6 +58,11 @@ Chromatics is a lightweight third-party companion app which connects FINAL FANTA
 
 Please visit [this page](https://chromaticsffxiv.com/download.html) for installation instructions.
 
+# Developers
+
+Clone this repository. Install .NET Development Pack 4.7.2.
+
+There is a library dependency to ASUS Aura SDK, which can be downloaded from this page: [ASUS Aura SDK download page](https://www.asus.com/campaign/aura/us/SDK.php).
 
 # Credits
 
