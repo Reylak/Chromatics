@@ -64,6 +64,8 @@ Clone this repository. Install .NET Development Pack 4.7.2.
 
 There is a library dependency to ASUS Aura SDK, which can be downloaded from this page: [ASUS Aura SDK download page](https://www.asus.com/campaign/aura/us/SDK.php).
 
+DLLs may still be missing in "Build Dependencies".
+
 # Credits
 
 * [Colore library for Razer device support](https://github.com/CoraleStudios/Colore)
