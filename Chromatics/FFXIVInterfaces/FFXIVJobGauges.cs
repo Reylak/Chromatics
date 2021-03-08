@@ -980,7 +980,7 @@ namespace Chromatics
                         //Console.WriteLine(Cooldowns.FlowerCharge * 100);
 
 
-                        if (statEffects.Find(i => i.StatusName == "Freecure") != null)
+                        if (statEffects.Find(i => i.StatusID == 155) != null)
                         {
                             GlobalApplyMapKeyLighting("NumLock", cureproc, false);
                             GlobalApplyMapKeyLighting("NumDivide", cureproc, false);

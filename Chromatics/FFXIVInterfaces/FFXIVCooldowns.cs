@@ -2399,7 +2399,7 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return RawResourceData[8];
+                return RawResourceData[4];
             }
         }
 
@@ -2411,7 +2411,7 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return RawResourceData[7];
+                return RawResourceData[2];
             }
         }
 
@@ -2423,7 +2423,7 @@ namespace Chromatics.FFXIVInterfaces
                     return false;
                 CheckCache();
 
-                if (RawResourceData[9] == 3)
+                if (RawResourceData[5] == 3)
                     return true;
 
                 return false;
