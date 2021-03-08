@@ -82,7 +82,7 @@ namespace Chromatics
                         }
                         
 
-                        if (statEffects.Find(i => i.StatusName == "Defiance") != null)
+                        if (statEffects.Find(i => i.StatusID == 91) != null)
                         {
                             GlobalApplyMapKeyLighting("NumSubtract", defiancecol, false);
                             GlobalApplyMapKeyLighting("NumAdd", defiancecol, false);
