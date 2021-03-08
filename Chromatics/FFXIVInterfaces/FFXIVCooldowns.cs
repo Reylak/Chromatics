@@ -1940,7 +1940,7 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return GetTimer(4);
+                return GetTimer(0);
             }
         }
 
@@ -1952,7 +1952,7 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return RawResourceData[7];
+                return RawResourceData[3];
             }
         }
 
@@ -1964,7 +1964,7 @@ namespace Chromatics.FFXIVInterfaces
                     return false;
                 CheckCache();
 
-                if (RawResourceData[6] == 2)
+                if (RawResourceData[2] == 2)
                     return true;
 
                 return false;
