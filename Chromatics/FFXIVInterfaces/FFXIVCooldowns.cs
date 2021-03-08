@@ -2179,19 +2179,7 @@ namespace Chromatics.FFXIVInterfaces
         public static float Sharpcast => CooldownType4Remaining;
 
         public static float Enochian => CooldownType15Remaining;
-
-        public static float EnochianTimeRemaining
-        {
-            get
-            {
-                if (!Initialized)
-                    return 0;
-                CheckCache();
-
-                return GetTimer(6);
-            }
-        }
-
+        
         public static float EnochianCharge
         {
             get
@@ -2200,25 +2188,22 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return RawResourceData[5];
+                return RawResourceData[0];
             }
         }
-
-        public static bool PolyglotActive
+        
+        public static float EnochianTimeRemaining
         {
             get
             {
                 if (!Initialized)
-                    return false;
+                    return 0;
                 CheckCache();
 
-                if (RawResourceData[10] == 1)
-                    return true;
-
-                return false;
+                return GetTimer(2);
             }
         }
-
+        
         public static int UmbralIce
         {
             get
@@ -2227,11 +2212,11 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                if (RawResourceData[8] == 255)
+                if (RawResourceData[4] == 255)
                     return 1;
-                if (RawResourceData[8] == 254)
+                if (RawResourceData[4] == 254)
                     return 2;
-                if (RawResourceData[8] == 253)
+                if (RawResourceData[4] == 253)
                     return 3;
 
                 return 0;
@@ -2246,13 +2231,13 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                if (RawResourceData[8] > 3)
+                if (RawResourceData[4] > 3)
                     return 0;
 
-                return RawResourceData[8];
+                return RawResourceData[4];
             }
         }
-
+        
         public static int UmbralHearts
         {
             get
@@ -2261,10 +2246,22 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return RawResourceData[9];
+                return RawResourceData[5];
             }
         }
 
+        public static int Polyglot
+        {
+            get
+            {
+                if (!Initialized)
+                    return 0;
+                CheckCache();
+
+                return RawResourceData[6];
+            }
+        }
+        
         public static bool EnochianActive
         {
             get
@@ -2273,11 +2270,26 @@ namespace Chromatics.FFXIVInterfaces
                     return false;
                 CheckCache();
 
-                return RawResourceData[11] == 1;
+                return RawResourceData[7] == 1;
             }
         }
+        
+        public static bool PolyglotActive
+        {
+            get
+            {
+                if (!Initialized)
+                    return false;
+                CheckCache();
 
+                if (RawResourceData[7] == 2)
+                    return true;
 
+                return false;
+            }
+        }
+        
+        
         // Arcanist
         public static float EnergyDrain => CooldownType1Remaining;
 
