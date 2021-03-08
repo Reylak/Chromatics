@@ -2878,12 +2878,13 @@ namespace Chromatics.FFXIVInterfaces
                                 new Signature
                                 {
                                     Key = "CLASSRESOURCES",
-                                    Value = "488BCEE8********83F81B0F85********807D**020F85********488B1D",
+                                    Value = "488B0D********4885C90F84********488B05********3C03",
                                     ASMSignature = true,
                                     PointerPath = new List<long>
                                     {
-                                        0,
-                                        12
+                                        -22L,
+                                        0L,
+                                        8L
                                     }
                                 }
                             };
