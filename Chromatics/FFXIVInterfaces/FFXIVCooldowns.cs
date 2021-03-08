@@ -2099,15 +2099,15 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                if (RawResourceData[8] == 5)
+                if (RawResourceData[4] == 5)
                 {
                     return BardSongs.MagesBallad;
                 }
-                if (RawResourceData[8] == 10)
+                if (RawResourceData[4] == 10)
                 {
                     return BardSongs.ArmysPaeon;
                 }
-                if (RawResourceData[8] == 15)
+                if (RawResourceData[4] == 15)
                 {
                     return BardSongs.WanderersMinuet;
                 }
@@ -2124,7 +2124,7 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return GetTimer(4);
+                return GetTimer(0);
             }
         }
 
@@ -2136,7 +2136,7 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return RawResourceData[6];
+                return RawResourceData[2];
 
             }
         }
@@ -2149,7 +2149,7 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return RawResourceData[7];
+                return RawResourceData[3];
 
             }
         }
