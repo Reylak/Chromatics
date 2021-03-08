@@ -304,7 +304,7 @@ namespace Chromatics
                             }
                         }
                         
-                        if (statEffects.ToList().Find(i => i.StatusName == "Iron Will") != null)
+                        if (statEffects.ToList().Find(i => i.StatusID == 79) != null)
                         {
                             GlobalApplyMapKeyLighting("NumLock", ironwillcol, false);
                             GlobalApplyMapKeyLighting("NumDivide", ironwillcol, false);
@@ -327,9 +327,9 @@ namespace Chromatics
                             GlobalApplyMapKeyLighting("NumEnter", negpldcol, false);
                         }
 
-                        if (statEffects.Find(i => i.StatusName == "Sword Oath") != null)
+                        if (statEffects.Find(i => i.StatusID == 78) != null)
                         {
-                            var oathstacks = (int)statEffects.Find(x => x.StatusName == "Sword Oath").Stacks;
+                            var oathstacks = (int)statEffects.Find(x => x.StatusID == 1902 || x.StatusID == 1991).Stacks;
                             switch (oathstacks)
                             {
                                 case 3:
