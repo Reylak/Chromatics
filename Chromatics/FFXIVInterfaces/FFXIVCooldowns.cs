@@ -2303,19 +2303,6 @@ namespace Chromatics.FFXIVInterfaces
 
         public static float EyeForAnEye => CooldownType10Remaining;
 
-        public static int AetherflowCount
-        {
-            get
-            {
-                if (!Initialized)
-                    return 0;
-                CheckCache();
-
-                // Only the 4 low bits hold the aetherflow count. Higher holds aethertrail attunement.
-                return RawResourceData[6] & 0xf;
-            }
-        }
-
 
         // Summoner
         public static float Fester => CooldownType3Remaining;
@@ -2332,7 +2319,7 @@ namespace Chromatics.FFXIVInterfaces
 
         public static float Deathflare => CooldownType15Remaining;
 
-        public static int AethertrailCount
+        public static float DreadwyrmTranceTimeRemaining
         {
             get
             {
@@ -2340,8 +2327,67 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                // Only the 4 high bits hold the aethertrail count. Lower holds aetherflow stacks.
-                return RawResourceData[6] >> 4;
+                return GetTimer(0);
+            }
+        }
+
+        public static bool DreadwyrmTranceActive
+        {
+            get
+            {
+                if (!Initialized)
+                    return false;
+                CheckCache();
+
+                return RawResourceData[2] == 5;
+            }
+        }
+
+        public static bool BahamutSummoned
+        {
+            get
+            {
+                if (!Initialized)
+                    return false;
+                CheckCache();
+
+                return RawResourceData[3] == 1;
+            }
+        }
+        
+        public static int SummonerAetherflowCount
+        {
+            get
+            {
+                if (!Initialized)
+                    return 0;
+                CheckCache();
+
+                return RawResourceData[4] & 0x3;
+            }
+        }
+        
+        public static int DreadwyrmAetherCount
+        {
+            get
+            {
+                if (!Initialized)
+                    return 0;
+                CheckCache();
+
+                return (RawResourceData[4] >> 2) & 0x3;
+            }
+        }
+        
+        public static bool PhoenixReady
+        {
+            get
+            {
+                if (!Initialized)
+                    return false;
+                CheckCache();
+
+                return ((RawResourceData[4] >> 4) & 0x3) == 1;
             }
         }
 

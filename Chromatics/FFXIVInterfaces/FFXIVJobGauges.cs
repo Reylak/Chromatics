@@ -1361,20 +1361,20 @@ namespace Chromatics
 
                         break;
                     case Actor.Job.SMN:
-                        var aetherflowsmn = Cooldowns.AetherflowCount;
+                        var aetherflowsmn = Cooldowns.SummonerAetherflowCount;
 
                         var burstsmncol = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobSMNAetherflow);
                         var burstsmnempty = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobSMNNegative);
-
+                        
+                        /*TODO add flashing when trance reaches end (for Deathflare), and colors for Bahamut/Phoenix
+                         ready to summon (color burst), currently summoned (color base), or other (off) */
 
                         //Lightbar
                         if (_LightbarMode == LightbarMode.JobGauge)
                         {
                             var JobLightbar_Collection = DeviceEffects.LightbarZones;
-                            var JobLightbar_Interpolate = ((int)Cooldowns.BloodOfTheDragonTimeRemaining - 0) * (JobLightbar_Collection.Length - 0) / (15 - 0) + 0;
-
+                            var JobLightbar_Interpolate = ((int)Cooldowns.DreadwyrmTranceTimeRemaining - 0) * (JobLightbar_Collection.Length - 0) / (15 - 0) + 0;
                             
-
                             for (int i = 0; i < JobLightbar_Collection.Length; i++)
                             {
                                 GlobalApplyMapLightbarLighting(JobLightbar_Collection[i],
@@ -1386,7 +1386,7 @@ namespace Chromatics
                         if (_FKeyMode == FKeyMode.JobGauge)
                         {
                             var JobFunction_Collection = DeviceEffects.Functions;
-                            var JobFunction_Interpolate = ((int)Cooldowns.BloodOfTheDragonTimeRemaining - 0) * (JobFunction_Collection.Length - 0) / (15 - 0) + 0;
+                            var JobFunction_Interpolate = ((int)Cooldowns.DreadwyrmTranceTimeRemaining - 0) * (JobFunction_Collection.Length - 0) / (15 - 0) + 0;
                             
                             for (int i = 0; i < JobFunction_Collection.Length; i++)
                             {
@@ -1398,7 +1398,7 @@ namespace Chromatics
                         if (_FKeyMode == FKeyMode.HpJobMp)
                         {
                             var JobFunction_Collection = DeviceEffects.Function2;
-                            var JobFunction_Interpolate = ((int)Cooldowns.BloodOfTheDragonTimeRemaining - 0) * (JobFunction_Collection.Length - 0) / (15 - 0) + 0;
+                            var JobFunction_Interpolate = ((int)Cooldowns.DreadwyrmTranceTimeRemaining - 0) * (JobFunction_Collection.Length - 0) / (15 - 0) + 0;
                             
                             for (int i = 0; i < JobFunction_Collection.Length; i++)
                             {
