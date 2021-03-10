@@ -2422,7 +2422,19 @@ namespace Chromatics.FFXIVInterfaces
         public static float SacredSoil => CooldownType4Remaining;
 
         public static float Dissipation => CooldownType11Remaining;
+        
+        public static int ScholarAetherflowCount
+        {
+            get
+            {
+                if (!Initialized)
+                    return 0;
+                CheckCache();
 
+                return RawResourceData[2];
+            }
+        }
+        
         public static int FaerieGauge
         {
             get
@@ -2431,10 +2443,59 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return RawResourceData[7];
+                return RawResourceData[3];
             }
         }
 
+        public static float SeraphRemainingTime
+        {
+            get
+            {
+                if (!Initialized)
+                    return 0;
+                CheckCache();
+
+                return GetTimer(4);
+            }
+        }
+
+        public static bool FaerieEos
+        {
+            get
+            {
+                if (!Initialized)
+                    return false;
+                CheckCache();
+                
+                // only available when fairy is dissipated / Seraph is summoned
+                return RawResourceData[6] == 6;
+            }
+        }
+        
+        public static bool FaerieSelene
+        {
+            get
+            {
+                if (!Initialized)
+                    return false;
+                CheckCache();
+
+                // only available when fairy is dissipated / Seraph is summoned
+                return RawResourceData[6] == 7;
+            }
+        }
+        
+        public static bool SeraphOrDissipated
+        {
+            get
+            {
+                if (!Initialized)
+                    return false;
+                CheckCache();
+
+                return RawResourceData[6] != 0;
+            }
+        }
 
         // White Mage
         public static float ClericStance => CooldownType0Remaining;

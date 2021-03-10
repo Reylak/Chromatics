@@ -1457,11 +1457,15 @@ namespace Chromatics
                         break;
                     case Actor.Job.SCH:
 
-                        var aetherflowsch = Cooldowns.AetherflowCount;
+                        var aetherflowsch = Cooldowns.ScholarAetherflowCount;
 
                         var burstschcol = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobSCHAetherflow);
                         var faerieccol = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobSCHFaerieGauge);
                         var burstschempty = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobSCHNegative);
+                        
+                        /*TODO replace faerie gauge in bar, with remaining time of Seraph when applicable
+                         display color depending on Eos/Selene or Seraph summoned */
+                        
                         
                         //Lightbar
                         if (_LightbarMode == LightbarMode.JobGauge)
