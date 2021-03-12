@@ -2711,10 +2711,30 @@ namespace Chromatics.FFXIVInterfaces
                 return CooldownType12Remaining;
             }
         }
+        
+        public static float HyperchargeTime
+        {
+            get
+            {
+                if (!Initialized)
+                    return 0;
+                CheckCache();
 
+                return GetTimer(0);
+            }
+        }
+        
+        public static float AutoturretTimeRemaining
+        {
+            get
+            {
+                if (!Initialized)
+                    return 0;
+                CheckCache();
 
-
-
+                return GetTimer(2);
+            }
+        }
 
         public static int HeatGauge
         {
@@ -2724,11 +2744,11 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return RawResourceData[8];
+                return RawResourceData[4];
             }
         }
 
-        public static int Battery
+        public static int BatteryGauge
         {
             get
             {
@@ -2736,11 +2756,11 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return RawResourceData[9];
+                return RawResourceData[5];
             }
         }
-
-        public static float HyperchargeTime
+        
+        public static int LastBatteryAmount
         {
             get
             {
@@ -2748,10 +2768,9 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return GetTimer(4);
+                return RawResourceData[6];
             }
         }
-
 
         public static bool HyperchargeActive
         {
@@ -2761,7 +2780,7 @@ namespace Chromatics.FFXIVInterfaces
                     return false;
                 CheckCache();
 
-                return (RawResourceData[11] & 1) > 0;
+                return (RawResourceData[7] & 0x1) == 1;
             }
         }
 
@@ -2773,7 +2792,7 @@ namespace Chromatics.FFXIVInterfaces
                     return false;
                 CheckCache();
 
-                return (RawResourceData[11] & 2) > 0;
+                return (RawResourceData[7] & 0x2) == 1;
             }
         }
 

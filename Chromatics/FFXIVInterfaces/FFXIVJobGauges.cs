@@ -2231,39 +2231,15 @@ namespace Chromatics
                         break;
                     case Actor.Job.MCH:
                         //Machinist
-                        var ammo = Cooldowns.Battery;
-
-                        var ammoburst = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobMCHAmmo);
+                        
+                        /*TODO do something with the remaining time of Hypercharge, the battery gauge and the fact that
+                         the turrent is summoned and its remaining time (or maybe not) */
+                        
                         var negmchburst = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobMCHNegative);
 
                         var heatnormal = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobMCHHeatGauge);
                         var heatover = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobMCHOverheat);
-
-                        switch (ammo)
-                        {
-                            case 1:
-                                GlobalApplyMapKeyLighting("NumSubtract", negmchburst, false);
-                                GlobalApplyMapKeyLighting("NumAdd", negmchburst, false);
-                                GlobalApplyMapKeyLighting("NumEnter", ammoburst, false);
-                                break;
-                            case 2:
-                                GlobalApplyMapKeyLighting("NumSubtract", negmchburst, false);
-                                GlobalApplyMapKeyLighting("NumAdd", ammoburst, false);
-                                GlobalApplyMapKeyLighting("NumEnter", ammoburst, false);
-                                break;
-                            case 3:
-                                GlobalApplyMapKeyLighting("NumSubtract", ammoburst, false);
-                                GlobalApplyMapKeyLighting("NumAdd", ammoburst, false);
-                                GlobalApplyMapKeyLighting("NumEnter", ammoburst, false);
-                                break;
-                            default:
-                                GlobalApplyMapKeyLighting("NumSubtract", negmchburst, false);
-                                GlobalApplyMapKeyLighting("NumAdd", negmchburst, false);
-                                GlobalApplyMapKeyLighting("NumEnter", negmchburst, false);
-                                break;
-                        }
-
-
+                        
                         var mchgb = Cooldowns.HeatGauge;
 
                         if (Cooldowns.HyperchargeActive)
