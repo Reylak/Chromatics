@@ -2013,7 +2013,7 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return GetTimer(4);
+                return GetTimer(0);
             }
         }
 
@@ -2025,10 +2025,22 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return RawResourceData[9];
+                return RawResourceData[4];
             }
         }
 
+        // this is currently unused in the game
+        public static int HutonGauge
+        {
+            get
+            {
+                if (!Initialized)
+                    return 0;
+                CheckCache();
+
+                return RawResourceData[5];
+            }
+        }
 
         // Bard
         public static float Bloodletter
