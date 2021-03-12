@@ -2059,16 +2059,10 @@ namespace Chromatics
                     case Actor.Job.AST:
                         var burstastcol = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobASTNegative);
                         
-                        var cardheld = Cooldowns.CurrentCard;
+                        //TODO use a color to display prominently the card currently held, and also display the current
+                        // states of the arcana
 
-                        if (statEffects.Find(i => i.StatusName == "Lady of Crowns Drawn") != null)
-                        {
-                            cardheld = Cooldowns.CardTypes.Lady;
-                        }
-                        else if (statEffects.Find(i => i.StatusName == "Lord of Crowns Drawn") != null)
-                        {
-                            cardheld = Cooldowns.CardTypes.Lord;
-                        }
+                        var cardheld = Cooldowns.HeldCard;
 
                         if (cardheld != Cooldowns.CardTypes.None)
                         {
@@ -2093,20 +2087,14 @@ namespace Chromatics
                                 case Cooldowns.CardTypes.Spire:
                                     burstastcol = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobASTSpire);
                                     break;
-                                case Cooldowns.CardTypes.Lady:
-                                    burstastcol = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobASTLady);
-                                    break;
-                                case Cooldowns.CardTypes.Lord:
-                                    burstastcol = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobASTLord);
-                                    break;
                             }
                             
-                            if (Cooldowns.CurrentCard != _currentCard)
+                            if (Cooldowns.HeldCard != _currentCard)
                             {
-                                if (Cooldowns.CurrentCard != Cooldowns.CardTypes.None)
+                                if (Cooldowns.HeldCard != Cooldowns.CardTypes.None)
                                     GlobalRipple1(burstastcol, 80, baseColor);
 
-                                _currentCard = Cooldowns.CurrentCard;
+                                _currentCard = Cooldowns.HeldCard;
                                 _burstastcol = burstastcol;
                             }
                             

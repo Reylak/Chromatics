@@ -26,17 +26,15 @@ namespace Chromatics.FFXIVInterfaces
             Arrow = 3,
             Spear = 4,
             Ewer = 5,
-            Spire = 6,
-            Lady = 7,
-            Lord = 8
+            Spire = 6
         }
 
-        public enum RoyalRoadTypes
+        public enum Arcana
         {
             None = 0,
-            Enhanced = 1,
-            Extended = 2,
-            Spread = 3
+            Solar = 1,
+            Lunar = 2,
+            Celestial = 3
         }
 
         private static CooldownRawData _rawData;
@@ -2600,7 +2598,7 @@ namespace Chromatics.FFXIVInterfaces
         // Astrologian
         public static float LuminiferousAether => CooldownType9Remaining;
 
-        public static float CurrentCardRemainingTime
+         public static CardTypes HeldCard
         {
             get
             {
@@ -2608,11 +2606,11 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return GetTimer(6);
+                return (CardTypes) RawResourceData[4];
             }
         }
 
-        public static CardTypes CurrentCard
+        public static Arcana Arcanum1
         {
             get
             {
@@ -2620,17 +2618,11 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                // Chop off the high order bits containing the held card
-                var card = RawResourceData[8] & 0xf;
-
-                if (card > 6 || card < 1)
-                    return CardTypes.None;
-
-                return (CardTypes) card;
+                return (Arcana) RawResourceData[5];
             }
         }
 
-        public static CardTypes HeldCard
+        public static Arcana Arcanum2
         {
             get
             {
@@ -2638,17 +2630,11 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                // Chop off the low order bits containing the current card
-                var card = RawResourceData[8] >> 4;
-
-                if (card > 6 || card < 1)
-                    return CardTypes.None;
-
-                return (CardTypes) card;
+                return (Arcana) RawResourceData[6];
             }
         }
-
-        public static RoyalRoadTypes RoyalRoadEffect
+        
+        public static Arcana Arcanum3
         {
             get
             {
@@ -2656,17 +2642,10 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                // Chop off the low order bits containing the current card
-                var card = RawResourceData[11] >> 4;
-
-                if (card > 3 || card < 1)
-                    return RoyalRoadTypes.None;
-
-                return (RoyalRoadTypes) card;
+                return (Arcana) RawResourceData[7];
             }
         }
-
-
+        
         // Machinist
         public static float Wildfire
         {
