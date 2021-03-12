@@ -1818,10 +1818,45 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return RawResourceData[4];
+                return RawResourceData[0];
             }
         }
 
+        public static float DarksideTimeRemaining
+        {
+            get
+            {
+                if (!Initialized)
+                    return 0;
+                CheckCache();
+
+                return GetTimer(2);
+            }
+        }
+
+        public static bool DarkArts
+        {
+            get
+            {
+                if (!Initialized)
+                    return false;
+                CheckCache();
+
+                return RawResourceData[4] == 1;
+            }
+        }
+        
+        public static float LivingShadowTimeRemaining
+        {
+            get
+            {
+                if (!Initialized)
+                    return 0;
+                CheckCache();
+
+                return GetTimer(6);
+            }
+        }
 
         // Warrior
         public static float Defiance => CooldownType0Remaining;

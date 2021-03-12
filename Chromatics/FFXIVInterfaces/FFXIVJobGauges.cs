@@ -1733,6 +1733,9 @@ namespace Chromatics
                         var bloodgauge = Cooldowns.BloodGauge;
                         var bloodPol = (bloodgauge - 0) * (50 - 0) / (100 - 0) + 0;
                         
+                        /*TODO add display of remaining time of Darkside (flashing when near the end?), Dark Arts 
+                         available and maybe whether the Living Shadow is summoned? */
+                        
                         GlobalApplyMapKeyLighting("NumSubtract", negdrkcol, false);
                         GlobalApplyMapKeyLighting("NumAdd", negdrkcol, false);
                         GlobalApplyMapKeyLighting("NumEnter", negdrkcol, false);
@@ -1747,7 +1750,7 @@ namespace Chromatics
 
                             for (int i = 0; i < JobLightbar_Collection.Length; i++)
                             {
-                                if (statEffects.Find(t => t.StatusName == "Grit") != null)
+                                if (statEffects.Find(t => t.StatusID == 743) != null)
                                 {
                                     GlobalApplyMapLightbarLighting(JobLightbar_Collection[i],
                                         JobLightbar_Interpolate > i ? gritcol : negdrkcol, false, false);
@@ -1770,7 +1773,7 @@ namespace Chromatics
 
                             for (int i = 0; i < JobFunction_Collection.Length; i++)
                             {
-                                if (statEffects.Find(t => t.StatusName == "Grit") != null)
+                                if (statEffects.Find(t => t.StatusID == 743) != null)
                                 {
                                     GlobalApplyMapKeyLighting(JobFunction_Collection[i],
                                         JobFunction_Interpolate > i ? gritcol : negdrkcol, false);
@@ -1792,7 +1795,7 @@ namespace Chromatics
 
                             for (int i = 0; i < JobFunction_Collection.Length; i++)
                             {
-                                if (statEffects.Find(t => t.StatusName == "Grit") != null)
+                                if (statEffects.Find(t => t.StatusID == 743) != null)
                                 {
                                     GlobalApplyMapKeyLighting(JobFunction_Collection[i],
                                         JobFunction_Interpolate > i ? gritcol : negdrkcol, false);
@@ -1808,7 +1811,7 @@ namespace Chromatics
 
                         if (bloodPol <= 50 && bloodPol > 40)
                         {
-                            if (statEffects.Find(i => i.StatusName == "Grit") != null)
+                            if (statEffects.Find(i => i.StatusID == 743) != null)
                             {
                                 GlobalApplyMapKeyLighting("NumLock", gritcol, false);
                                 GlobalApplyMapKeyLighting("NumDivide", gritcol, false);
@@ -1853,7 +1856,7 @@ namespace Chromatics
                         }
                         else if (bloodPol <= 40 && bloodPol > 30)
                         {
-                            if (statEffects.Find(i => i.StatusName == "Grit") != null)
+                            if (statEffects.Find(i => i.StatusID == 743) != null)
                             {
                                 GlobalApplyMapKeyLighting("NumLock", negdrkcol, false);
                                 GlobalApplyMapKeyLighting("NumDivide", negdrkcol, false);
@@ -1898,7 +1901,7 @@ namespace Chromatics
                         }
                         if (bloodPol <= 30 && bloodPol > 20)
                         {
-                            if (statEffects.Find(i => i.StatusName == "Grit") != null)
+                            if (statEffects.Find(i => i.StatusID == 743) != null)
                             {
                                 GlobalApplyMapKeyLighting("NumLock", negdrkcol, false);
                                 GlobalApplyMapKeyLighting("NumDivide", negdrkcol, false);
@@ -1943,7 +1946,7 @@ namespace Chromatics
                         }
                         else if (bloodPol <= 20 && bloodPol > 10)
                         {
-                            if (statEffects.Find(i => i.StatusName == "Grit") != null)
+                            if (statEffects.Find(i => i.StatusID == 743) != null)
                             {
                                 GlobalApplyMapKeyLighting("NumLock", negdrkcol, false);
                                 GlobalApplyMapKeyLighting("NumDivide", negdrkcol, false);
@@ -1988,7 +1991,7 @@ namespace Chromatics
                         }
                         else if (bloodPol <= 10 && bloodPol > 0)
                         {
-                            if (statEffects.Find(i => i.StatusName == "Grit") != null)
+                            if (statEffects.Find(i => i.StatusID == 743) != null)
                             {
                                 GlobalApplyMapKeyLighting("NumLock", negdrkcol, false);
                                 GlobalApplyMapKeyLighting("NumDivide", negdrkcol, false);
