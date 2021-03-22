@@ -2788,9 +2788,13 @@ namespace Chromatics
                         break;
                     case Actor.Job.DNC:
 
+                        /*TODO if I understand the code correctly, it colors the keypad when under Standard Step to show
+                         the next step to execute, but it does not do it under Technical Step.
+                         Also, feathers count and esprit gauges are not displayed. */
+                        
                         if (hotbars != null)
                         { 
-                            if (statEffects.Find(i => i.StatusName == "Technical Finish") != null)
+                            if (statEffects.Find(i => i.StatusID == 2049) != null)
                             {
                                 GlobalApplyMapKeyLighting("NumLock",
                                     ColorTranslator.FromHtml(ColorMappings
@@ -2805,7 +2809,7 @@ namespace Chromatics
                                     ColorTranslator.FromHtml(ColorMappings
                                         .ColorMappingJobDNCTechnicalFinish), false);
                             }
-                            else if (statEffects.Find(i => i.StatusName == "Standard Finish") != null)
+                            else if (statEffects.Find(i => i.StatusID == 2113) != null)
                             {
                                 GlobalApplyMapKeyLighting("NumLock",
                                     ColorTranslator.FromHtml(ColorMappings
@@ -2836,7 +2840,7 @@ namespace Chromatics
                                         .ColorMappingJobDNCNegative), false);
                             }
 
-                            if (statEffects.Find(i => i.StatusName == "Standard Step") != null)
+                            if (statEffects.Find(i => i.StatusID == 2023) != null)
                             {
 
                                 foreach (var hotbar in hotbars.ActionContainers)

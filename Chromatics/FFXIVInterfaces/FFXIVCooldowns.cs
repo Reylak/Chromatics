@@ -37,6 +37,15 @@ namespace Chromatics.FFXIVInterfaces
             Celestial = 3
         }
 
+        public enum DanceSteps
+        {
+            None = 0,
+            Emboite = 1,
+            Entrechat = 2,
+            Jete = 3,
+            Pirouette = 4
+        }
+
         private static CooldownRawData _rawData;
         public static DateTime LastUpdated = DateTime.MinValue;
         private static readonly TimeSpan UpdateInterval = TimeSpan.FromSeconds(0.05);
@@ -2917,12 +2926,12 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return RawResourceData[4];
+                return RawResourceData[0];
 
             }
         }
 
-        public static int Espirit
+        public static int Esprit
         {
             get
             {
@@ -2930,8 +2939,56 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return RawResourceData[5];
+                return RawResourceData[1];
 
+            }
+        }
+        
+        public static DanceSteps Step1
+        {
+            get
+            {
+                if (!Initialized)
+                    return DanceSteps.None;
+                CheckCache();
+
+                return (DanceSteps) RawResourceData[2];
+            }
+        }
+                
+        public static DanceSteps Step2
+        {
+            get
+            {
+                if (!Initialized)
+                    return DanceSteps.None;
+                CheckCache();
+
+                return (DanceSteps) RawResourceData[3];
+            }
+        }
+                
+        public static DanceSteps Step3
+        {
+            get
+            {
+                if (!Initialized)
+                    return DanceSteps.None;
+                CheckCache();
+
+                return (DanceSteps) RawResourceData[4];
+            }
+        }
+                
+        public static DanceSteps Step4
+        {
+            get
+            {
+                if (!Initialized)
+                    return DanceSteps.None;
+                CheckCache();
+
+                return (DanceSteps) RawResourceData[5];
             }
         }
 
@@ -2943,7 +3000,7 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return RawResourceData[10];
+                return RawResourceData[6];
 
             }
         }
