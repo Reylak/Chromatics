@@ -3047,6 +3047,44 @@ namespace Chromatics.FFXIVInterfaces
             }
         }
         
+        // Gunbreaker
+
+        public static int CartridgeCount
+        {
+            get
+            {
+                if (!Initialized)
+                    return 0;
+                CheckCache();
+
+                return RawResourceData[0];
+            }
+        }
+        
+        public static float ContinuationTimeRemaining
+        {
+            get
+            {
+                if (!Initialized)
+                    return 0;
+                CheckCache();
+
+                return GetTimer(2);
+            }
+        }
+        
+        public static int Continuation
+        {
+            get
+            {
+                if (!Initialized)
+                    return 0;
+                CheckCache();
+
+                return RawResourceData[4];
+            }
+        }
+        
         public static void RefreshData()
         {
             lock (RefreshLock)

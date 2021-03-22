@@ -3412,7 +3412,9 @@ namespace Chromatics
 
                         break;
                     case Actor.Job.GNB:
-                        if (statEffects.Find(i => i.StatusName == "Royal Guard") != null)
+                        /*TODO continuation not displayed (although it is not even displayed in game so I'm not sure) */
+                        
+                        if (statEffects.Find(i => i.StatusID == 392) != null)
                         {
                             GlobalApplyMapKeyLighting("NumLock",
                                 ColorTranslator.FromHtml(ColorMappings
