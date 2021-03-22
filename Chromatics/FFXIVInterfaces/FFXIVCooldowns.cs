@@ -3272,7 +3272,7 @@ namespace Chromatics.FFXIVInterfaces
                             var address = Scanner.Instance.Locations["CLASSRESOURCES"];
 
                             //PluginController.debug(" " + address.ToString("X8"));
-                            RawResourceData = MemoryHandler.Instance.GetByteArray(address.GetAddress(), 20);
+                            RawResourceData = MemoryHandler.Instance.GetByteArray(address.GetAddress(), 8);
                         }
 
 
