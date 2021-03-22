@@ -3669,7 +3669,7 @@ namespace Chromatics
                         var collectablecol = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobCrafterCollectable);
                         var craftercol = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobCrafterCrafter);
                         
-                        if (statEffects.Find(i => i.StatusName == "Collectable Synthesis") != null)
+                        if (statEffects.Find(i => i.StatusID == 903) != null)
                         {
                             GlobalApplyMapKeyLighting("NumLock", collectablecol, false);
                             GlobalApplyMapKeyLighting("NumDivide", collectablecol, false);
@@ -3682,9 +3682,9 @@ namespace Chromatics
                             GlobalApplyMapKeyLighting("NumMultiply", craftercol, false);
                         }
                         
-                        if (statEffects.Find(i => i.StatusName == "Inner Quiet") != null)
+                        if (statEffects.Find(i => i.StatusID == 251) != null)
                         {
-                            var IQStacks = statEffects.Find(i => i.StatusName == "Inner Quiet").Stacks;
+                            var IQStacks = statEffects.Find(i => i.StatusID == 251).Stacks;
 
                             //Lightbar
                             if (_LightbarMode == LightbarMode.JobGauge)
