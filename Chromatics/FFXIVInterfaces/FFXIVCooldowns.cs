@@ -2974,7 +2974,7 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return RawResourceData[4];
+                return RawResourceData[0];
             }
         }
 
@@ -2986,7 +2986,7 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return RawResourceData[5];
+                return RawResourceData[1];
             }
         }
         
