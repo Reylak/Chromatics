@@ -2458,6 +2458,9 @@ namespace Chromatics
                         break;
                     case Actor.Job.SAM:
                         //Samurai
+                        
+                        //TODO displaying the meditation gauge is missing
+                        
                         var negsamcol = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobSAMNegative);
                         var setsucol = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobSAMSetsu); //Top
                         var getsucol = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobSAMGetsu); //Left

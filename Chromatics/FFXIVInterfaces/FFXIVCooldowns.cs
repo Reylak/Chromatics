@@ -2437,18 +2437,6 @@ namespace Chromatics.FFXIVInterfaces
         }
 
         //Samurai
-        public static int SenGauge
-        {
-            get
-            {
-                if (!Initialized)
-                    return 0;
-                CheckCache();
-                
-                return RawResourceData[8];
-            }
-        }
-
         public static int KenkiCharge
         {
             get
@@ -2457,7 +2445,67 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
                 
-                return RawResourceData[7];
+                return RawResourceData[3];
+            }
+        }
+        
+        public static int MeditationStacks
+        {
+            get
+            {
+                if (!Initialized)
+                    return 0;
+                CheckCache();
+                
+                return RawResourceData[4];
+            }
+        }
+        
+        public static int SenGauge
+        {
+            get
+            {
+                if (!Initialized)
+                    return 0;
+                CheckCache();
+
+                return RawResourceData[5];
+            }
+        }
+        
+        public static bool Setsu
+        {
+            get
+            {
+                if (!Initialized)
+                    return false;
+                CheckCache();
+
+                return (RawResourceData[5] & 0x1) != 0;
+            }
+        }
+        
+        public static bool Getsu
+        {
+            get
+            {
+                if (!Initialized)
+                    return false;
+                CheckCache();
+
+                return (RawResourceData[5] & 0x2) != 0;
+            }
+        }
+        
+        public static bool Ka
+        {
+            get
+            {
+                if (!Initialized)
+                    return false;
+                CheckCache();
+
+                return (RawResourceData[5] & 0x4) != 0;
             }
         }
         
