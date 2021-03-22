@@ -391,19 +391,20 @@ namespace Chromatics
 
                         break;
                     case Actor.Job.MNK:
-                        var greased = Cooldowns.GreasedLightningStacks;
-                        var greaseRemaining = Cooldowns.GreasedLightningTimeRemaining;
+                        //TODO needs update after patch 5.4 revamp (chakra, greased lightning...)
+                        var lightning = Cooldowns.GreasedLightning;
+                        var chakra = Cooldowns.Chakra;
+                        var lightningremaining = Cooldowns.GreasedLightningTimeRemaining;
+                        var lightningfrozen = Cooldowns.GreasedLightningFrozenTimer;
                         var burstmnkcol = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobMNKGreased);
                         var burstmnkempty = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobMNKNegative);
-
 
                         //Lightbar
                         if (_LightbarMode == LightbarMode.JobGauge)
                         {
                             var JobLightbar_Collection = DeviceEffects.LightbarZones;
-                            var JobLightbar_Interpolate = ((int)greaseRemaining - 0) * (JobLightbar_Collection.Length - 0) / (16 - 0) + 0;
+                            var JobLightbar_Interpolate = ((int)chakra - 0) * (JobLightbar_Collection.Length - 0) / (5 - 0) + 0;
                             
-
                             for (int i = 0; i < JobLightbar_Collection.Length; i++)
                             {
                                 GlobalApplyMapLightbarLighting(JobLightbar_Collection[i],
@@ -415,7 +416,7 @@ namespace Chromatics
                         if (_FKeyMode == FKeyMode.JobGauge)
                         {
                             var JobFunction_Collection = DeviceEffects.Functions;
-                            var JobFunction_Interpolate = ((int)greaseRemaining - 0) * (JobFunction_Collection.Length - 0) / (16 - 0) + 0;
+                            var JobFunction_Interpolate = ((int)chakra - 0) * (JobFunction_Collection.Length - 0) / (5 - 0) + 0;
 
                             for (int i = 0; i < JobFunction_Collection.Length; i++)
                             {
@@ -427,7 +428,7 @@ namespace Chromatics
                         if (_FKeyMode == FKeyMode.HpJobMp)
                         {
                             var JobFunction_Collection = DeviceEffects.Function2;
-                            var JobFunction_Interpolate = ((int)greaseRemaining - 0) * (JobFunction_Collection.Length - 0) / (16 - 0) + 0;
+                            var JobFunction_Interpolate = ((int)chakra - 0) * (JobFunction_Collection.Length - 0) / (5 - 0) + 0;
 
                             for (int i = 0; i < JobFunction_Collection.Length; i++)
                             {
@@ -436,9 +437,9 @@ namespace Chromatics
                             }
                         }
 
-                        if (greased > 0)
+                        if (chakra > 0)
                         {
-                            if (greaseRemaining > 0 && greaseRemaining <= 5)
+                            if (chakra >= 5)
                             {
                                 ToggleGlobalFlash3(true);
                                 GlobalFlash3(burstmnkcol, 150);
@@ -447,9 +448,30 @@ namespace Chromatics
                             {
                                 ToggleGlobalFlash3(false);
 
-                                switch (greased)
+                                switch (chakra)
                                 {
+                                    case 4:
+                                        GlobalApplyMapKeyLighting("NumLock", burstmnkcol, false);
+                                        GlobalApplyMapKeyLighting("NumDivide", burstmnkcol, false);
+                                        GlobalApplyMapKeyLighting("NumMultiply", burstmnkcol, false);
+
+                                        GlobalApplyMapKeyLighting("Num9", burstmnkcol, false);
+                                        GlobalApplyMapKeyLighting("Num6", burstmnkcol, false);
+                                        GlobalApplyMapKeyLighting("Num3", burstmnkcol, false);
+
+                                        GlobalApplyMapKeyLighting("Num8", burstmnkcol, false);
+                                        GlobalApplyMapKeyLighting("Num5", burstmnkcol, false);
+                                        GlobalApplyMapKeyLighting("Num2", burstmnkcol, false);
+
+                                        GlobalApplyMapKeyLighting("Num7", burstmnkcol, false);
+                                        GlobalApplyMapKeyLighting("Num4", burstmnkcol, false);
+                                        GlobalApplyMapKeyLighting("Num1", burstmnkcol, false);
+                                        break;
                                     case 3:
+                                        GlobalApplyMapKeyLighting("NumLock", burstmnkempty, false);
+                                        GlobalApplyMapKeyLighting("NumDivide", burstmnkempty, false);
+                                        GlobalApplyMapKeyLighting("NumMultiply", burstmnkempty, false);
+
                                         GlobalApplyMapKeyLighting("Num9", burstmnkcol, false);
                                         GlobalApplyMapKeyLighting("Num6", burstmnkcol, false);
                                         GlobalApplyMapKeyLighting("Num3", burstmnkcol, false);
@@ -463,6 +485,10 @@ namespace Chromatics
                                         GlobalApplyMapKeyLighting("Num1", burstmnkcol, false);
                                         break;
                                     case 2:
+                                        GlobalApplyMapKeyLighting("NumLock", burstmnkempty, false);
+                                        GlobalApplyMapKeyLighting("NumDivide", burstmnkempty, false);
+                                        GlobalApplyMapKeyLighting("NumMultiply", burstmnkempty, false);
+
                                         GlobalApplyMapKeyLighting("Num9", burstmnkempty, false);
                                         GlobalApplyMapKeyLighting("Num6", burstmnkempty, false);
                                         GlobalApplyMapKeyLighting("Num3", burstmnkempty, false);
@@ -476,6 +502,10 @@ namespace Chromatics
                                         GlobalApplyMapKeyLighting("Num1", burstmnkcol, false);
                                         break;
                                     case 1:
+                                        GlobalApplyMapKeyLighting("NumLock", burstmnkempty, false);
+                                        GlobalApplyMapKeyLighting("NumDivide", burstmnkempty, false);
+                                        GlobalApplyMapKeyLighting("NumMultiply", burstmnkempty, false);
+                                        
                                         GlobalApplyMapKeyLighting("Num9", burstmnkempty, false);
                                         GlobalApplyMapKeyLighting("Num6", burstmnkempty, false);
                                         GlobalApplyMapKeyLighting("Num3", burstmnkempty, false);
@@ -494,6 +524,10 @@ namespace Chromatics
                         else
                         {
                             ToggleGlobalFlash3(false);
+                            
+                            GlobalApplyMapKeyLighting("NumLock", burstmnkempty, false);
+                            GlobalApplyMapKeyLighting("NumDivide", burstmnkempty, false);
+                            GlobalApplyMapKeyLighting("NumMultiply", burstmnkempty, false);
 
                             GlobalApplyMapKeyLighting("Num9", burstmnkempty, false);
                             GlobalApplyMapKeyLighting("Num6", burstmnkempty, false);

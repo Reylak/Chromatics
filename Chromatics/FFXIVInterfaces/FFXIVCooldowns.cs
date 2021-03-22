@@ -1920,7 +1920,6 @@ namespace Chromatics.FFXIVInterfaces
 
         public static float PerfectBalance => CooldownType10Remaining;
 
-
         public static float GreasedLightningTimeRemaining
         {
             get
@@ -1929,11 +1928,11 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return GetTimer(4);
+                return GetTimer(0);
             }
         }
 
-        public static int GreasedLightningStacks
+        public static int GreasedLightning
         {
             get
             {
@@ -1941,7 +1940,31 @@ namespace Chromatics.FFXIVInterfaces
                     return 0;
                 CheckCache();
 
-                return RawResourceData[6];
+                return RawResourceData[2];
+            }
+        }
+
+        public static int Chakra
+        {
+            get
+            {
+                if (!Initialized)
+                    return 0;
+                CheckCache();
+                
+                return RawResourceData[3];
+            }
+        }
+
+        public static bool GreasedLightningFrozenTimer
+        {
+            get
+            {
+                if (!Initialized)
+                    return false;
+                CheckCache();
+                
+                return RawResourceData[4] > 0;
             }
         }
 
