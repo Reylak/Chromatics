@@ -3666,21 +3666,6 @@ namespace Chromatics
                         //Crafter
                         var negcraftercol = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobCrafterNegative);
                         var innerquietcol = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobCrafterInnerquiet);
-                        var collectablecol = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobCrafterCollectable);
-                        var craftercol = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobCrafterCrafter);
-                        
-                        if (statEffects.Find(i => i.StatusID == 903) != null)
-                        {
-                            GlobalApplyMapKeyLighting("NumLock", collectablecol, false);
-                            GlobalApplyMapKeyLighting("NumDivide", collectablecol, false);
-                            GlobalApplyMapKeyLighting("NumMultiply", collectablecol, false);
-                        }
-                        else
-                        {
-                            GlobalApplyMapKeyLighting("NumLock", craftercol, false);
-                            GlobalApplyMapKeyLighting("NumDivide", craftercol, false);
-                            GlobalApplyMapKeyLighting("NumMultiply", craftercol, false);
-                        }
                         
                         if (statEffects.Find(i => i.StatusID == 251) != null)
                         {
