@@ -614,8 +614,6 @@ namespace Chromatics.Datastore
         public string ColorMappingMenuBase = ColorTranslator.ToHtml(Color.OrangeRed);
         public string ColorMappingJobCrafterNegative = ColorTranslator.ToHtml(Color.Black);
         public string ColorMappingJobCrafterInnerquiet = ColorTranslator.ToHtml(Color.BlueViolet);
-        public string ColorMappingJobCrafterCollectable = ColorTranslator.ToHtml(Color.Gold);
-        public string ColorMappingJobCrafterCrafter = ColorTranslator.ToHtml(Color.DodgerBlue);
         public string ColorMappingMenuHighlight1 = ColorTranslator.ToHtml(Color.Red);
         public string ColorMappingMenuHighlight2 = ColorTranslator.ToHtml(Color.Red);
         public string ColorMappingMenuHighlight3 = ColorTranslator.ToHtml(Color.Red);
@@ -796,6 +794,8 @@ namespace Chromatics.Datastore
         public string ColorMappingJobBTNHighlight = ColorTranslator.ToHtml(Color.Yellow);
         public string ColorMappingJobFSHBase = ColorTranslator.ToHtml(Color.DeepSkyBlue);
         public string ColorMappingJobFSHHighlight = ColorTranslator.ToHtml(Color.White);
+        public string ColorMappingJobFSHCollectable = ColorTranslator.ToHtml(Color.Gold);
+        public string ColorMappingJobFSHNegative = ColorTranslator.ToHtml(Color.Black);
     }
 
     public static class DataStoreFunctions

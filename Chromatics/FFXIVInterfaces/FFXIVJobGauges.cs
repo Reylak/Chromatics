@@ -3962,11 +3962,69 @@ namespace Chromatics
                         GlobalApplyMapKeyLighting("NumSubtract", negcraftercol, false);
 
                         break;
-
                     case Actor.Job.FSH:
+                        var collectablecol = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobFSHCollectable);
+                        var fisherneg = ColorTranslator.FromHtml(ColorMappings.ColorMappingJobFSHNegative);
+
+                        if (statEffects.Find(i => i.StatusID == 805) != null)
+                        {
+                            GlobalApplyMapKeyLighting("NumLock", collectablecol, false);
+                            GlobalApplyMapKeyLighting("NumDivide", collectablecol, false);
+                            GlobalApplyMapKeyLighting("NumMultiply", collectablecol, false);
+                        }
+                        else
+                        {
+                            GlobalApplyMapKeyLighting("NumLock", fisherneg, false);
+                            GlobalApplyMapKeyLighting("NumDivide", fisherneg, false);
+                            GlobalApplyMapKeyLighting("NumMultiply", fisherneg, false);
+                        }
+                        
+                        GlobalApplyMapKeyLighting("Num7", baseColor, false);
+                        GlobalApplyMapKeyLighting("Num8", baseColor, false);
+                        GlobalApplyMapKeyLighting("Num9", baseColor, false);
+
+                        GlobalApplyMapKeyLighting("Num4", baseColor, false);
+                        GlobalApplyMapKeyLighting("Num5", baseColor, false);
+                        GlobalApplyMapKeyLighting("Num6", baseColor, false);
+
+                        GlobalApplyMapKeyLighting("Num1", baseColor, false);
+                        GlobalApplyMapKeyLighting("Num2", baseColor, false);
+                        GlobalApplyMapKeyLighting("Num3", baseColor, false);
+                        GlobalApplyMapKeyLighting("Num0", baseColor, false);
+                        GlobalApplyMapKeyLighting("NumDecimal", baseColor, false);
+
+                        if (_LightbarMode == LightbarMode.JobGauge)
+                        {
+                            foreach (var f in DeviceEffects.LightbarZones)
+                            {
+                                GlobalApplyMapLightbarLighting(f, baseColor, false);
+                            }
+                        }
+
+                        if (_FKeyMode == FKeyMode.JobGauge)
+                        {
+                            foreach (var f in DeviceEffects.Functions)
+                            {
+                                GlobalApplyMapKeyLighting(f, baseColor, false);
+                            }
+                        }
+
+                        if (_FKeyMode == FKeyMode.HpJobMp)
+                        {
+                            foreach (var f in DeviceEffects.Function2)
+                            {
+                                GlobalApplyMapKeyLighting(f, baseColor, false);
+                            }
+                        }
+                        
+                        GlobalApplyMapKeyLighting("NumEnter", baseColor, false);
+                        GlobalApplyMapKeyLighting("NumAdd", baseColor, false);
+                        GlobalApplyMapKeyLighting("NumSubtract", baseColor, false);
+                        
+                        break;
                     case Actor.Job.BTN:
                     case Actor.Job.MIN:
-                        //Gatherer
+                        //Non Fisher Gatherer
                         GlobalApplyMapKeyLighting("NumLock", baseColor, false);
                         GlobalApplyMapKeyLighting("NumDivide", baseColor, false);
                         GlobalApplyMapKeyLighting("NumMultiply", baseColor, false);
